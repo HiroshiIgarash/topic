@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+</head>
+
+<body>
+    <main id="app" class="wrap">
+        <h1>ポーカー</h1>
+        {{rankCheck()}}
+
+        <div class="board">
+            <div class="cards">
+                <div class="cards-item" v-for="(card,index) in cards" :key="index" :style="cardStyle(card)"
+                    @click="clickCard(card)">
+                    <div :id="'card'+index" class="card">
+                        <span class="num-upperleft">
+                            {{card.disp}}
+                        </span><!-- /.mark-upperleft -->
+                        <div class="mark">
+                            {{card.mark}}
+                        </div><!-- /.mark -->
+                        <span class="num-bottomright">{{card.disp}}</span><!-- /.num-bottomright -->
+                    </div>
+                    <div class="hold">
+                        {{card.ishold?"HOLD":""}}
+                    </div><!-- /.hold -->
+                </div><!-- /.cards-item -->
+            </div><!-- /.cards -->
+
+            <button class="btn" @click="reGiveCards">くばる</button>
+        </div><!-- /.board -->
+
+
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
