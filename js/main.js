@@ -88,10 +88,10 @@ const app = new Vue({
         reGiveCards: function () {
 
             if (this.phase == 'betting') {
-                this.phase = 'selecting';
                 //betする
-                if (this.coin <= this.bet) return;
+                if (this.coin < this.bet) return;
                 this.coin -= this.bet;
+                this.phase = 'selecting';
             } else if (this.phase == 'selecting') {
 
 
@@ -146,6 +146,7 @@ const app = new Vue({
             }
         },
         messageShow: function (message) {
+            document.activeElement.blur();
             this.message = message
             this.messageFlag = true;
         },
@@ -270,6 +271,8 @@ const app = new Vue({
                     break;
                 }
                 case 39: { //みぎ矢印
+                    event.preventDefault();
+                    if(this.messageFlag) return;
                     if (this.phase != 'selecting') return;
                     if (this.focusCard < 5) {
                         this.focusCard++;
@@ -284,10 +287,11 @@ const app = new Vue({
                     }
                     const el = document.getElementById(id);
                     el.focus();
-                    event.preventDefault();
                     break;
                 }
                 case 37: { //ひだり矢印
+                    event.preventDefault();
+                    if(this.messageFlag) return;
                     if (this.phase != 'selecting') return;
                     if (this.focusCard > 0) {
                         this.focusCard--;
@@ -302,7 +306,6 @@ const app = new Vue({
                     }
                     const el = document.getElementById(id);
                     el.focus();
-                    event.preventDefault();
                     break;
                 }
             }
