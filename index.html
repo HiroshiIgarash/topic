@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Tapestry&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 </head>
 
 <body>
     <main id="app" class="wrap">
-        <h1>ポーカー</h1>
+        <h1>ビデオポーカー</h1>
         <p>ビデオポーカーを作ってみました。カードをクリックしてHOLDすることができます。<br>
             今後はメダル制を導入したり、JOKERを入れてみたりしていこうと思っています。
         </p>
@@ -42,6 +42,20 @@
             </div><!-- /.cards -->
 
             <button class="btn" @click="reGiveCards">くばる</button>
+            <div class="bet-info-area">
+                <div class="bet-info">
+                    <p class="bet-info__ttl">COIN</p>
+                    <div class="bet-info__body">
+                        <p class="bet-info__content">1196868</p>
+                    </div><!-- /.bet-info__body -->
+                </div><!-- /.coin -->
+                <div class="bet-info">
+                    <p class="bet-info__ttl">BET</p>
+                    <div class="bet-info__body">
+                        <p class="bet-info__content">1000</p>
+                    </div><!-- /.bet-info__body -->
+                </div><!-- /.bet -->
+            </div><!-- /.bet-info -->
         </div><!-- /.board -->
 
 

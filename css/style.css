@@ -35,7 +35,6 @@ h1 {
     font-family: 'Tapestry', cursive;
 }
 .board{
-    height: 500px;
     background: rgb(131, 58, 180);
     overflow: hidden;
     background: radial-gradient(circle, rgba(203,73,55,1) 0%, rgba(45,4,1,1) 100%);
@@ -89,4 +88,43 @@ h1 {
     width: 100%;
     height: 20px;
     color:#fff;
+}
+
+.bet-info-area{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+.bet-info:first-of-type{
+    margin-right: 30px;
+}
+.bet-info__ttl{
+    background-color: #513A39;
+    border: 3px solid #B4AE8A;
+    border-radius: 20px;
+    width: 100px;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.75rem;
+}
+.bet-info__body{
+    margin-top: 2px;
+    background-color: #B4AE8A;
+    width: 150px;
+    border-radius: 20px;
+    padding: 3px 20px;
+    box-shadow: 0 0 10px #333,inset 0 0 3px #333 ;
+}
+.bet-info__content{
+    padding: 2px;
+    background-color: #F7F2CE;
+    border: 1px solid rgba(0,0,0,.3);
+    color: #333;
+    box-shadow: inset 0 0 8px #333;
+    border-radius: 3px;
+    line-height: 1;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-align: right;
 }
