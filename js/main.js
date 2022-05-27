@@ -171,6 +171,7 @@ const app = new Vue({
         },
         clickMessage: function () {
             this.coin += this.hands[this.rankCheck()].odds * this.bet;
+            if(this.coin>9999999) this.coin==9999999;
             this.reset();
         },
         rankCheck: function () {
