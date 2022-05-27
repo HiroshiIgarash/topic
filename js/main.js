@@ -5,6 +5,8 @@ const app = new Vue({
         deck: [],
         mark: ["♠", "♥", "♦", "♣"],
         cards: [],
+        coin:1196868,
+        bet:1000,
     },
     created() {
         this.createDeck(),
