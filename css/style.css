@@ -163,6 +163,10 @@ h1 {
     margin-right: 40px;
     border-collapse: collapse;
 }
+
+.point-area__r-table{
+    border-collapse: collapse;
+}
 .point-area-table__row:not(:last-child){
     border-bottom: 1px solid #fff;
 }
