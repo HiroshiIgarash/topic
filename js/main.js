@@ -88,10 +88,10 @@ const app = new Vue({
         reGiveCards: function () {
 
             if (this.phase == 'betting') {
-                this.phase = 'selecting';
                 //betする
-                if (this.coin <= this.bet) return;
+                if (this.coin < this.bet) return;
                 this.coin -= this.bet;
+                this.phase = 'selecting';
             } else if (this.phase == 'selecting') {
 
 
