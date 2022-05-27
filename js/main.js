@@ -7,6 +7,18 @@ const app = new Vue({
         cards: [],
         coin: 6868,
         bet: 1000,
+        odds:{
+            'Rfl':500,
+            'stfl':100,
+            'fourCard':50,
+            'fullHouse':10,
+            'flush':5,
+            'straight':4,
+            'threeCard':3,
+            'twoPair':1,
+            'onePair':0,
+            'highCard':0,
+        }
     },
     created() {
         this.createDeck(),
