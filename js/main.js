@@ -83,11 +83,11 @@ const app = new Vue({
 
             if (this.phase == 'betting') {
                 this.phase = 'selecting';
-            } else if (this.phase == 'selecting') {
-
                 //betする
                 if (this.coin <= this.bet) return;
                 this.coin -= this.bet;
+            } else if (this.phase == 'selecting') {
+
 
                 let alertflag = true;
                 let allhold = true;
@@ -129,6 +129,7 @@ const app = new Vue({
         },
         cardStyle: function (card) {
             let color;
+            let opacity;
             switch (card.mark) {
                 case "♠": {
                     color = "rgb(208,175,46)";
@@ -147,7 +148,8 @@ const app = new Vue({
                     break;
                 }
             }
-            return { color: color }
+            if(this.phase=='betting') opacity=0;
+            return { color: color ,opacity:opacity}
         },
         clickCard: function (card) {
             if(this.phase!='selecting') return;
