@@ -7,17 +7,17 @@ const app = new Vue({
         cards: [],
         coin: 6868,
         bet: 1000,
-        hands:{
-            'Rfl':{odds:500,ja:'ロイヤルフラッシュ'},
-            'stfl':{odds:100,ja:'ストレートフラッシュ'},
-            'fourCard':{odds:50},ja:'フォー・オブ・ア・カインド',
-            'fullHouse':{odds:10,ja:'フルハウス'},
-            'flush':{odds:5,ja:'フラッシュ'},
-            'straight':{odds:4,ja:'ストレート'},
-            'threeCard':{odds:3,ja:'スリー・オブ・ア・カインド'},
-            'twoPair':{odds:1,ja:'ツーペア'},
-            'onePair':{odds:0,ja:'ワンペア'},
-            'highCard':{odds:0,ja:'ハイカード'},
+        hands: {
+            'Rfl': { odds: 500, ja: 'ロイヤルフラッシュ' },
+            'stfl': { odds: 100, ja: 'ストレートフラッシュ' },
+            'fourCard': { odds: 50, ja: 'フォー・オブ・ア・カインド' },
+            'fullHouse': { odds: 10, ja: 'フルハウス' },
+            'flush': { odds: 5, ja: 'フラッシュ' },
+            'straight': { odds: 4, ja: 'ストレート' },
+            'threeCard': { odds: 3, ja: 'スリー・オブ・ア・カインド' },
+            'twoPair': { odds: 1, ja: 'ツーペア' },
+            'onePair': { odds: 0, ja: 'ワンペア' },
+            'highCard': { odds: 0, ja: 'ハイカード' },
         }
     },
     created() {
@@ -77,8 +77,8 @@ const app = new Vue({
         reGiveCards: function () {
 
             //betする
-            if(this.coin<=this.bet) return;
-            this.coin-=this.bet;
+            if (this.coin <= this.bet) return;
+            this.coin -= this.bet;
 
             let alertflag = true;
             let allhold = true;
@@ -185,12 +185,12 @@ const app = new Vue({
             } else return "ハイカード"
         },
         betUp: function () {
-            if(this.bet+1000<=this.coin){
+            if (this.bet + 1000 <= this.coin) {
                 this.bet += 1000;
             }
         },
         betDown: function () {
-            if(this.bet>1000){
+            if (this.bet > 1000) {
                 this.bet -= 1000;
             }
         }
