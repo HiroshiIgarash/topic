@@ -5,8 +5,8 @@ const app = new Vue({
         deck: [],
         mark: ["♠", "♥", "♦", "♣"],
         cards: [],
-        coin:1196868,
-        bet:1000,
+        coin: 6868,
+        bet: 1000,
     },
     created() {
         this.createDeck(),
@@ -167,7 +167,16 @@ const app = new Vue({
             } else if (JSON.stringify(pairs) == JSON.stringify([2])) {
                 return "ワンペア"
             } else return "ハイカード"
+        },
+        betUp: function () {
+            if(this.bet+1000<=this.coin){
+                this.bet += 1000;
+            }
+        },
+        betDown: function () {
+            if(this.bet>1000){
+                this.bet -= 1000;
+            }
         }
-
     }
 })
