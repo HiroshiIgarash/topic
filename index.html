@@ -21,9 +21,14 @@
         <p>ビデオポーカーを作ってみました。カードをクリックしてHOLDすることができます。<br>
             今後はメダル制を導入したり、JOKERを入れてみたりしていこうと思っています。
         </p>
-        <!-- {{rankCheck()}} -->
+        {{phase}}
 
         <div class="board">
+            <div class="message-window" v-show="messageFlag">
+                <div class="message-box" @click="clickMessage">
+                    {{message}}
+                </div><!-- /.message-box -->
+            </div><!-- /.message-window -->
             <div class="point-area">
                 <div class="point-area__inner">
                     <table class="point-area__l-table">
@@ -75,7 +80,7 @@
             <div class="cards">
                 <div class="cards-item" v-for="(card,index) in cards" :key="index" :style="cardStyle(card)"
                     @click="clickCard(card)">
-                    <div :id="'card'+index" class="card">
+                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}">
                         <span class="num-upperleft">
                             {{card.disp}}
                         </span><!-- /.mark-upperleft -->

@@ -18,7 +18,10 @@ const app = new Vue({
             'twoPair': { odds: 1, ja: 'ツーペア' },
             'onePair': { odds: 0, ja: 'ワンペア' },
             'highCard': { odds: 0, ja: 'ハイカード' },
-        }
+        },
+        phase: 'betting',
+        messageFlag:false,
+        message:'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！'
     },
     created() {
         this.createDeck(),
@@ -30,6 +33,8 @@ const app = new Vue({
             this.cards.length = 0;
             this.createDeck();
             this.giveCards();
+            this.phase='betting';
+            this.messageFlag=false;
         },
         createDeck: function () {
             for (let i = 0; i < 4; i++) {
@@ -76,45 +81,55 @@ const app = new Vue({
 
         reGiveCards: function () {
 
-            //betする
-            if (this.coin <= this.bet) return;
-            this.coin -= this.bet;
+            if (this.phase == 'betting') {
+                this.phase = 'selecting';
+                //betする
+                if (this.coin <= this.bet) return;
+                this.coin -= this.bet;
+            } else if (this.phase == 'selecting') {
 
-            let alertflag = true;
-            let allhold = true;
 
-            this.cards.forEach((card, index) => {
-                if (!card.ishold) {
-                    let dir = 'up';
-                    allhold = false;
-                    const el = document.getElementById('card' + index);
-                    el.classList.add('cardUp');
-                    el.addEventListener('transitionend', () => {
-                        if (dir == 'down') {
-                            if (alertflag) {
-                                alert(this.hands[this.rankCheck()].ja);
-                                this.coin+=this.hands[this.rankCheck()].odds*this.bet;
-                                alertflag = false;
-                                this.reset();
+                let alertflag = true;
+                let allhold = true;
+
+                this.cards.forEach((card, index) => {
+                    if (!card.ishold) {
+                        let dir = 'up';
+                        allhold = false;
+                        const el = document.getElementById('card' + index);
+                        el.classList.add('cardUp');
+                        el.addEventListener('transitionend', () => {
+                            if (dir == 'down') {
+                                if (alertflag) {
+                                    this.messageShow(this.hands[this.rankCheck()].ja);
+                                    // this.coin += this.hands[this.rankCheck()].odds * this.bet;
+                                    alertflag = false;
+                                    // this.reset();
+                                }
+                                return;
                             }
-                            return;
-                        }
-                        el.classList.remove('cardUp');
-                        dir = 'down'
-                        let rand = Math.floor(Math.random() * this.deck.length);
-                        this.cards.splice(index, 1, this.deck[rand])
-                        this.deck.splice(rand, 1)
-                    });
+                            el.classList.remove('cardUp');
+                            dir = 'down'
+                            let rand = Math.floor(Math.random() * this.deck.length);
+                            this.cards.splice(index, 1, this.deck[rand])
+                            this.deck.splice(rand, 1)
+                        });
+                    }
+                });
+                if (allhold) {
+                    this.messageShow(this.hands[this.rankCheck()].ja);
+                    // this.coin += this.hands[this.rankCheck()].odds * this.bet;
+                    // this.reset();
                 }
-            });
-            if (allhold) {
-                alert(this.hands[this.rankCheck()].ja);
-                this.coin+=this.hands[this.rankCheck()].odds*this.bet;
-                this.reset();
             }
+        },
+        messageShow:function(message){
+            this.message=message
+            this.messageFlag=true;
         },
         cardStyle: function (card) {
             let color;
+            let opacity;
             switch (card.mark) {
                 case "♠": {
                     color = "rgb(208,175,46)";
@@ -133,10 +148,16 @@ const app = new Vue({
                     break;
                 }
             }
-            return { color: color }
+            if(this.phase=='betting') opacity=0;
+            return { color: color ,opacity:opacity}
         },
         clickCard: function (card) {
+            if(this.phase!='selecting') return;
             card.ishold = !card.ishold
+        },
+        clickMessage:function(){
+            this.coin += this.hands[this.rankCheck()].odds * this.bet;
+            this.reset();
         },
         rankCheck: function () {
             //ここに役判定のコードを書く
@@ -187,11 +208,13 @@ const app = new Vue({
             } else return "highCard"
         },
         betUp: function () {
+            if (this.phase != 'betting') return;
             if (this.bet + 1000 <= this.coin) {
                 this.bet += 1000;
             }
         },
         betDown: function () {
+            if (this.phase != 'betting') return;
             if (this.bet > 1000) {
                 this.bet -= 1000;
             }
