@@ -27,6 +27,12 @@
             <div class="message-window" v-show="messageFlag">
                 <div class="message-box" @click="clickMessage">{{message}}</div><!-- /.message-box -->
             </div><!-- /.message-window -->
+
+            <div class="bet-message" v-show="phase=='betting'">
+                <div  class="bet-info__bet-btn btn--plus"></div>
+                <div class="bet-info__bet-btn btn--minus"></div>
+                <p>かけ金変更</p>
+            </div><!-- /.bet-message -->
         
             <div class="point-area">
                 <div class="point-area__inner">
