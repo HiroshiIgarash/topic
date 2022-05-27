@@ -37,45 +37,45 @@
             <div class="point-area">
                 <div class="point-area__inner">
                     <table class="point-area__l-table">
-                        <tr class="point-area-table__row">
+                        <tr id = "Rfl" class="point-area-table__row">
                             <th class="point-area-table__head">ロイヤルフラッシュ</th>
                             <td class="point-area-table__content">{{bet*hands.Rfl.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="stfl" class="point-area-table__row">
                             <th class="point-area-table__head">ストレートフラッシュ</th>
                             <td class="point-area-table__content">{{bet*hands.stfl.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="fourCard" class="point-area-table__row">
                             <th class="point-area-table__head">フォー・オブ・ア・カインド</th>
                             <td class="point-area-table__content">{{bet*hands.fourCard.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="fullHouse" class="point-area-table__row">
                             <th class="point-area-table__head">フルハウス</th>
                             <td class="point-area-table__content">{{bet*hands.fullHouse.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="flush" class="point-area-table__row">
                             <th class="point-area-table__head">フラッシュ</th>
                             <td class="point-area-table__content">{{bet*hands.flush.odds}}</td>
                         </tr>
                     </table>
                     <table class="point-area__r-table">
-                        <tr class="point-area-table__row">
+                        <tr id="straight" class="point-area-table__row">
                             <th class="point-area-table__head">ストレート</th>
                             <td class="point-area-table__content">{{bet*hands.straight.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="threeCard" class="point-area-table__row">
                             <th class="point-area-table__head">スリー・オブ・ア・カインド</th>
                             <td class="point-area-table__content">{{bet*hands.threeCard.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="twoPair" class="point-area-table__row">
                             <th class="point-area-table__head">ツーペア</th>
                             <td class="point-area-table__content">{{bet*hands.twoPair.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="onePair" class="point-area-table__row">
                             <th class="point-area-table__head">ワンペア</th>
                             <td class="point-area-table__content">{{bet*hands.onePair.odds}}</td>
                         </tr>
-                        <tr class="point-area-table__row">
+                        <tr id="highCard" class="point-area-table__row">
                             <th class="point-area-table__head">ハイカード</th>
                             <td class="point-area-table__content">{{bet*hands.highCard.odds}}</td>
                         </tr>
@@ -85,7 +85,7 @@
             <div class="cards">
                 <div class="cards-item" v-for="(card,index) in cards" :key="index" :style="cardStyle(card)"
                     @click="clickCard(card)">
-                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}">
+                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}" tabindex="0">
                         <span class="num-upperleft">
                             {{card.disp}}
                         </span><!-- /.mark-upperleft -->
@@ -100,7 +100,7 @@
                 </div><!-- /.cards-item -->
             </div><!-- /.cards -->
 
-            <button class="btn" @click="reGiveCards">くばる</button>
+            <button id="btn" class="btn" @click="reGiveCards">くばる</button>
             <div class="bet-info-area">
                 <div class="bet-info">
                     <p class="bet-info__ttl">COIN</p>

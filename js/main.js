@@ -5,7 +5,7 @@ const app = new Vue({
         deck: [],
         mark: ["♠", "♥", "♦", "♣"],
         cards: [],
-        coin: 200000,
+        coin: 20000,
         bet: 1000,
         hands: {
             'Rfl': { odds: 500, ja: 'ロイヤルフラッシュ' },
@@ -21,7 +21,8 @@ const app = new Vue({
         },
         phase: 'betting',
         messageFlag: false,
-        message: 'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！'
+        message: 'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！',
+        focusCard: -1,
     },
     created() {
         this.createDeck(),
@@ -38,6 +39,8 @@ const app = new Vue({
             this.giveCards();
             this.phase = 'betting';
             this.messageFlag = false;
+            this.focusCard=-1;
+            document.activeElement.blur();
         },
         createDeck: function () {
             for (let i = 0; i < 4; i++) {
@@ -110,6 +113,7 @@ const app = new Vue({
                                         message = '残念でした！'
                                     } else {
                                         message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                                        document.getElementById(this.rankCheck()).classList.add('hit');
                                     }
                                     this.messageShow(message);
                                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
@@ -132,6 +136,7 @@ const app = new Vue({
                         message = '残念でした！'
                     } else {
                         message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                        document.getElementById(this.rankCheck()).classList.add('hit');
                     }
                     this.messageShow(message);
                     // this.messageShow(this.hands[this.rankCheck()].ja);
@@ -175,6 +180,7 @@ const app = new Vue({
         clickMessage: function () {
             this.coin += this.hands[this.rankCheck()].odds * this.bet;
             if (this.coin > 9999999) this.coin == 9999999;
+            document.getElementById(this.rankCheck()).classList.remove('hit');
             this.reset();
         },
         rankCheck: function () {
@@ -239,13 +245,19 @@ const app = new Vue({
         },
         onKeyDown(event) {
             switch (event.keyCode) {
-                case 32:{ //スペースキー
-                    if(this.messageFlag){
+                case 32: { //スペースキー
+                    if (this.messageFlag) {
                         this.clickMessage()
-                    }else{
+                    }else if(this.phase=='betting'){
                         this.reGiveCards();
+                    } else if (this.phase == 'selecting') {
+                        const el = document.activeElement;
+                        console.log(el);
+                        el.click();
+                        // this.reGiveCards();
                     }
                     event.preventDefault();
+                    break;
                 }
                 case 38: { //うえ矢印
                     this.betUp();
@@ -254,6 +266,42 @@ const app = new Vue({
                 }
                 case 40: { //した矢印
                     this.betDown();
+                    event.preventDefault();
+                    break;
+                }
+                case 39: { //みぎ矢印
+                    if (this.phase != 'selecting') return;
+                    if (this.focusCard < 5) {
+                        this.focusCard++;
+                    } else {
+                        this.focusCard = 0;
+                    }
+                    let id;
+                    if (this.focusCard != 5) {
+                        id = 'card' + this.focusCard;
+                    } else {
+                        id = 'btn';
+                    }
+                    const el = document.getElementById(id);
+                    el.focus();
+                    event.preventDefault();
+                    break;
+                }
+                case 37: { //ひだり矢印
+                    if (this.phase != 'selecting') return;
+                    if (this.focusCard > 0) {
+                        this.focusCard--;
+                    } else {
+                        this.focusCard = 5;
+                    }
+                    let id;
+                    if (this.focusCard != 5) {
+                        id = 'card' + this.focusCard;
+                    } else {
+                        id = 'btn';
+                    }
+                    const el = document.getElementById(id);
+                    el.focus();
                     event.preventDefault();
                     break;
                 }
