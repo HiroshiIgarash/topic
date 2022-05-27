@@ -27,6 +27,9 @@ const app = new Vue({
         this.createDeck(),
             this.giveCards()
     },
+    mounted() {
+        document.addEventListener('keydown', this.onKeyDown)
+    },
     methods: {
         reset: function () {
             this.deck.length = 0;
@@ -171,7 +174,7 @@ const app = new Vue({
         },
         clickMessage: function () {
             this.coin += this.hands[this.rankCheck()].odds * this.bet;
-            if(this.coin>9999999) this.coin==9999999;
+            if (this.coin > 9999999) this.coin == 9999999;
             this.reset();
         },
         rankCheck: function () {
@@ -233,6 +236,29 @@ const app = new Vue({
             if (this.bet > 1000) {
                 this.bet -= 1000;
             }
+        },
+        onKeyDown(event) {
+            switch (event.keyCode) {
+                case 32:{ //スペースキー
+                    if(this.messageFlag){
+                        this.clickMessage()
+                    }else{
+                        this.reGiveCards();
+                    }
+                    event.preventDefault();
+                }
+                case 38: { //うえ矢印
+                    this.betUp();
+                    event.preventDefault();
+                    break;
+                }
+                case 40: { //した矢印
+                    this.betDown();
+                    event.preventDefault();
+                    break;
+                }
+            }
         }
+
     }
 })
