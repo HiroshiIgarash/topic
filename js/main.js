@@ -64,6 +64,10 @@ const app = new Vue({
 
         reGiveCards: function () {
 
+            //betする
+            if(this.coin<=this.bet) return;
+            this.coin-=this.bet;
+
             let alertflag = true;
             let allhold = true;
 
