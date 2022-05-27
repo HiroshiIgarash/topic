@@ -7,17 +7,17 @@ const app = new Vue({
         cards: [],
         coin: 6868,
         bet: 1000,
-        odds:{
-            'Rfl':500,
-            'stfl':100,
-            'fourCard':50,
-            'fullHouse':10,
-            'flush':5,
-            'straight':4,
-            'threeCard':3,
-            'twoPair':1,
-            'onePair':0,
-            'highCard':0,
+        hands:{
+            'Rfl':{odds:500,ja:'ロイヤルフラッシュ'},
+            'stfl':{odds:100,ja:'ストレートフラッシュ'},
+            'fourCard':{odds:50},ja:'フォー・オブ・ア・カインド',
+            'fullHouse':{odds:10,ja:'フルハウス'},
+            'flush':{odds:5,ja:'フラッシュ'},
+            'straight':{odds:4,ja:'ストレート'},
+            'threeCard':{odds:3,ja:'スリー・オブ・ア・カインド'},
+            'twoPair':{odds:1,ja:'ツーペア'},
+            'onePair':{odds:0,ja:'ワンペア'},
+            'highCard':{odds:0,ja:'ハイカード'},
         }
     },
     created() {
