@@ -20,8 +20,8 @@ const app = new Vue({
             'highCard': { odds: 0, ja: 'ハイカード' },
         },
         phase: 'betting',
-        messageFlag:false,
-        message:'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！'
+        messageFlag: false,
+        message: 'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！'
     },
     created() {
         this.createDeck(),
@@ -33,8 +33,8 @@ const app = new Vue({
             this.cards.length = 0;
             this.createDeck();
             this.giveCards();
-            this.phase='betting';
-            this.messageFlag=false;
+            this.phase = 'betting';
+            this.messageFlag = false;
         },
         createDeck: function () {
             for (let i = 0; i < 4; i++) {
@@ -91,6 +91,7 @@ const app = new Vue({
 
                 let alertflag = true;
                 let allhold = true;
+                let message = '';
 
                 this.cards.forEach((card, index) => {
                     if (!card.ishold) {
@@ -101,7 +102,13 @@ const app = new Vue({
                         el.addEventListener('transitionend', () => {
                             if (dir == 'down') {
                                 if (alertflag) {
-                                    this.messageShow(this.hands[this.rankCheck()].ja);
+                                    let hand = this.hands[this.rankCheck()];
+                                    if (hand.odds == 0) {
+                                        message = '残念でした！'
+                                    } else {
+                                        message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                                    }
+                                    this.messageShow(message);
                                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
                                     alertflag = false;
                                     // this.reset();
@@ -117,15 +124,22 @@ const app = new Vue({
                     }
                 });
                 if (allhold) {
-                    this.messageShow(this.hands[this.rankCheck()].ja);
+                    let hand = this.hands[this.rankCheck()];
+                    if (hand.odds == 0) {
+                        message = '残念でした！'
+                    } else {
+                        message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                    }
+                    this.messageShow(message);
+                    // this.messageShow(this.hands[this.rankCheck()].ja);
                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
                     // this.reset();
                 }
             }
         },
-        messageShow:function(message){
-            this.message=message
-            this.messageFlag=true;
+        messageShow: function (message) {
+            this.message = message
+            this.messageFlag = true;
         },
         cardStyle: function (card) {
             let color;
@@ -148,14 +162,14 @@ const app = new Vue({
                     break;
                 }
             }
-            if(this.phase=='betting') opacity=0;
-            return { color: color ,opacity:opacity}
+            if (this.phase == 'betting') opacity = 0;
+            return { color: color, opacity: opacity }
         },
         clickCard: function (card) {
-            if(this.phase!='selecting') return;
+            if (this.phase != 'selecting') return;
             card.ishold = !card.ishold
         },
-        clickMessage:function(){
+        clickMessage: function () {
             this.coin += this.hands[this.rankCheck()].odds * this.bet;
             this.reset();
         },
