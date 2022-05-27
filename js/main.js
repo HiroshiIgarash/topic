@@ -5,7 +5,7 @@ const app = new Vue({
         deck: [],
         mark: ["♠", "♥", "♦", "♣"],
         cards: [],
-        coin: 200000,
+        coin: 20000,
         bet: 1000,
         hands: {
             'Rfl': { odds: 500, ja: 'ロイヤルフラッシュ' },
@@ -113,6 +113,7 @@ const app = new Vue({
                                         message = '残念でした！'
                                     } else {
                                         message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                                        document.getElementById(this.rankCheck()).classList.add('hit');
                                     }
                                     this.messageShow(message);
                                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
@@ -135,6 +136,7 @@ const app = new Vue({
                         message = '残念でした！'
                     } else {
                         message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                        document.getElementById(this.rankCheck()).classList.add('hit');
                     }
                     this.messageShow(message);
                     // this.messageShow(this.hands[this.rankCheck()].ja);
@@ -178,6 +180,7 @@ const app = new Vue({
         clickMessage: function () {
             this.coin += this.hands[this.rankCheck()].odds * this.bet;
             if (this.coin > 9999999) this.coin == 9999999;
+            document.getElementById(this.rankCheck()).classList.remove('hit');
             this.reset();
         },
         rankCheck: function () {
@@ -245,6 +248,8 @@ const app = new Vue({
                 case 32: { //スペースキー
                     if (this.messageFlag) {
                         this.clickMessage()
+                    }else if(this.phase=='betting'){
+                        this.reGiveCards();
                     } else if (this.phase == 'selecting') {
                         const el = document.activeElement;
                         console.log(el);
