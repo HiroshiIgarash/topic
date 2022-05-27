@@ -21,53 +21,56 @@
         <p>ビデオポーカーを作ってみました。カードをクリックしてHOLDすることができます。<br>
             今後はメダル制を導入したり、JOKERを入れてみたりしていこうと思っています。
         </p>
-        <!-- {{rankCheck()}} -->
+        {{phase}}
 
         <div class="board">
+            <div class="message-window" v-show="messageFlag">
+                <div class="message-box" @click="clickMessage">{{message}}</div><!-- /.message-box -->
+            </div><!-- /.message-window -->
             <div class="point-area">
                 <div class="point-area__inner">
                     <table class="point-area__l-table">
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ロイヤルフラッシュ</th>
-                            <td class="point-area-table__content">500000</td>
+                            <td class="point-area-table__content">{{bet*hands.Rfl.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ストレートフラッシュ</th>
-                            <td class="point-area-table__content">100000</td>
+                            <td class="point-area-table__content">{{bet*hands.stfl.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">フォー・オブ・ア・カインド</th>
-                            <td class="point-area-table__content">50000</td>
+                            <td class="point-area-table__content">{{bet*hands.fourCard.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">フルハウス</th>
-                            <td class="point-area-table__content">10000</td>
+                            <td class="point-area-table__content">{{bet*hands.fullHouse.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">フラッシュ</th>
-                            <td class="point-area-table__content">5000</td>
+                            <td class="point-area-table__content">{{bet*hands.flush.odds}}</td>
                         </tr>
                     </table>
                     <table class="point-area__r-table">
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ストレート</th>
-                            <td class="point-area-table__content">4000</td>
+                            <td class="point-area-table__content">{{bet*hands.straight.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">スリー・オブ・ア・カインド</th>
-                            <td class="point-area-table__content">3000</td>
+                            <td class="point-area-table__content">{{bet*hands.threeCard.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ツーペア</th>
-                            <td class="point-area-table__content">1000</td>
+                            <td class="point-area-table__content">{{bet*hands.twoPair.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ワンペア</th>
-                            <td class="point-area-table__content">0</td>
+                            <td class="point-area-table__content">{{bet*hands.onePair.odds}}</td>
                         </tr>
                         <tr class="point-area-table__row">
                             <th class="point-area-table__head">ハイカード</th>
-                            <td class="point-area-table__content">0</td>
+                            <td class="point-area-table__content">{{bet*hands.highCard.odds}}</td>
                         </tr>
                     </table>
                 </div><!-- /.point-area__inner -->
@@ -75,7 +78,7 @@
             <div class="cards">
                 <div class="cards-item" v-for="(card,index) in cards" :key="index" :style="cardStyle(card)"
                     @click="clickCard(card)">
-                    <div :id="'card'+index" class="card">
+                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}">
                         <span class="num-upperleft">
                             {{card.disp}}
                         </span><!-- /.mark-upperleft -->
@@ -104,8 +107,8 @@
                         <p class="bet-info__content">{{bet}}</p>
                     </div><!-- /.bet-info__body -->
                 </div><!-- /.bet -->
-                <button class="bet-info__bet-btn btn--plus"></button>
-                <button class="bet-info__bet-btn btn--minus"></button>
+                <button @click="betUp" class="bet-info__bet-btn btn--plus"></button>
+                <button @click="betDown" class="bet-info__bet-btn btn--minus"></button>
             </div><!-- /.bet-info -->
         </div><!-- /.board -->
 
