@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Kosugi+Maru&family=Tapestry&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Kosugi+Maru&family=Tapestry&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://kit.fontawesome.com/9e9313f09c.js" crossorigin="anonymous"></script>
@@ -19,8 +20,8 @@
 <body>
     <main id="app" class="wrap">
         <h1>ビデオポーカー</h1>
-        <p>ビデオポーカーを作ってみました。カードをクリックしてHOLDすることができます。<br>
-            今後はメダル制を導入したり、JOKERを入れてみたりしていこうと思っています。
+        <p>ビデオポーカーを作ってみました。カードをクリックもしくは方向キーでHOLDすることができます。（決定はスペースキー）<br>
+            今後はJOKER（ワイルドカード）を入れてみようと思っています。難しそう。
         </p>
         <!-- {{phase}} -->
 
@@ -30,15 +31,15 @@
             </div><!-- /.message-window -->
 
             <div class="bet-message" v-show="phase=='betting'">
-                <div  class="bet-info__bet-btn btn--plus"></div>
+                <div class="bet-info__bet-btn btn--plus"></div>
                 <div class="bet-info__bet-btn btn--minus"></div>
                 <p>かけ金変更</p>
             </div><!-- /.bet-message -->
-        
+
             <div class="point-area">
                 <div class="point-area__inner">
                     <table class="point-area__l-table">
-                        <tr id = "Rfl" class="point-area-table__row">
+                        <tr id="Rfl" class="point-area-table__row">
                             <th class="point-area-table__head">ロイヤルフラッシュ</th>
                             <td class="point-area-table__content">{{bet*hands.Rfl.odds}}</td>
                         </tr>
