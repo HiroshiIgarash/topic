@@ -246,6 +246,7 @@ const app = new Vue({
                         this.reGiveCards();
                     }
                     event.preventDefault();
+                    break;
                 }
                 case 38: { //うえ矢印
                     this.betUp();
@@ -255,6 +256,10 @@ const app = new Vue({
                 case 40: { //した矢印
                     this.betDown();
                     event.preventDefault();
+                    break;
+                }
+                case 39:{ //みぎ矢印
+                    
                     break;
                 }
             }

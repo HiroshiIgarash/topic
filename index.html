@@ -85,7 +85,7 @@
             <div class="cards">
                 <div class="cards-item" v-for="(card,index) in cards" :key="index" :style="cardStyle(card)"
                     @click="clickCard(card)">
-                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}">
+                    <div :id="'card'+index" class="card" :class="{cardUp:phase=='betting'}" tabindex="0">
                         <span class="num-upperleft">
                             {{card.disp}}
                         </span><!-- /.mark-upperleft -->
