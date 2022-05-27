@@ -27,6 +27,10 @@ h1 {
     background-color: #6a3229b3;
 }
 
+.btn:focus{
+    border: 3px solid green;
+}
+
 .cards-item {
     position: relative;
 }
