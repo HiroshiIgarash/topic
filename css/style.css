@@ -13,6 +13,7 @@ h1 {
 }
 
 .btn {
+    position: relative;
     display: inline-block;
     color: #fff;
     font-family: 'Kosugi Maru', sans-serif;
@@ -27,8 +28,20 @@ h1 {
     background-color: #6a3229b3;
 }
 
-.btn:focus {
-    border: 3px solid green;
+.btn:focus::before {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f0a7';
+    top: -10px;
+    font-size: 2rem;
+    color: #fff;
+    left: -30px;
+    transform: rotate(-90deg);
+    display: block;
+    width: 50px;
+    height: 50px;
+    z-index: 1000;
 }
 
 .cards-item {
@@ -63,6 +76,22 @@ h1 {
     top: 0;
     transition: top .8s;
     box-shadow: 5px 5px 6px rgb(0 0 0 / 50%);
+}
+
+.card:focus::before {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f0a7';
+    top: -20px;
+    font-size: 2rem;
+    color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 50px;
+    height: 50px;
+    z-index: 10000;
 }
 
 .cardUp {
@@ -251,6 +280,7 @@ h1 {
     padding: 20px 30px;
     border: 10px solid #fff;
     font-size: 1.2rem;
+    z-index: 9999;
 
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -281,8 +311,8 @@ h1 {
     transform: scale(0.7);
 }
 
-.hit{
-    color: #e6ba2c;  
+.hit {
+    color: #e6ba2c;
 }
 
 .hit::after {
