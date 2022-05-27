@@ -24,6 +24,11 @@
         {{phase}}
 
         <div class="board">
+            <div class="message-window" v-show="messageFlag">
+                <div class="message-box" @click="clickMessage">
+                    {{message}}
+                </div><!-- /.message-box -->
+            </div><!-- /.message-window -->
             <div class="point-area">
                 <div class="point-area__inner">
                     <table class="point-area__l-table">

@@ -20,6 +20,8 @@ const app = new Vue({
             'highCard': { odds: 0, ja: 'ハイカード' },
         },
         phase: 'betting',
+        messageFlag:false,
+        message:'おめでとうございます！ロイヤルストレートです！25000コイン獲得です！'
     },
     created() {
         this.createDeck(),
@@ -32,6 +34,7 @@ const app = new Vue({
             this.createDeck();
             this.giveCards();
             this.phase='betting';
+            this.messageFlag=false;
         },
         createDeck: function () {
             for (let i = 0; i < 4; i++) {
@@ -98,10 +101,10 @@ const app = new Vue({
                         el.addEventListener('transitionend', () => {
                             if (dir == 'down') {
                                 if (alertflag) {
-                                    alert(this.hands[this.rankCheck()].ja);
-                                    this.coin += this.hands[this.rankCheck()].odds * this.bet;
+                                    this.messageShow(this.hands[this.rankCheck()].ja);
+                                    // this.coin += this.hands[this.rankCheck()].odds * this.bet;
                                     alertflag = false;
-                                    this.reset();
+                                    // this.reset();
                                 }
                                 return;
                             }
@@ -114,11 +117,15 @@ const app = new Vue({
                     }
                 });
                 if (allhold) {
-                    alert(this.hands[this.rankCheck()].ja);
-                    this.coin += this.hands[this.rankCheck()].odds * this.bet;
-                    this.reset();
+                    this.messageShow(this.hands[this.rankCheck()].ja);
+                    // this.coin += this.hands[this.rankCheck()].odds * this.bet;
+                    // this.reset();
                 }
             }
+        },
+        messageShow:function(message){
+            this.message=message
+            this.messageFlag=true;
         },
         cardStyle: function (card) {
             let color;
@@ -145,6 +152,10 @@ const app = new Vue({
         clickCard: function (card) {
             if(this.phase!='selecting') return;
             card.ishold = !card.ishold
+        },
+        clickMessage:function(){
+            this.coin += this.hands[this.rankCheck()].odds * this.bet;
+            this.reset();
         },
         rankCheck: function () {
             //ここに役判定のコードを書く
