@@ -5,6 +5,20 @@ const app = new Vue({
         deck: [],
         mark: ["♠", "♥", "♦", "♣"],
         cards: [],
+        coin: 200000,
+        bet: 1000,
+        hands: {
+            'Rfl': { odds: 500, ja: 'ロイヤルフラッシュ' },
+            'stfl': { odds: 100, ja: 'ストレートフラッシュ' },
+            'fourCard': { odds: 50, ja: 'フォー・オブ・ア・カインド' },
+            'fullHouse': { odds: 10, ja: 'フルハウス' },
+            'flush': { odds: 5, ja: 'フラッシュ' },
+            'straight': { odds: 4, ja: 'ストレート' },
+            'threeCard': { odds: 3, ja: 'スリー・オブ・ア・カインド' },
+            'twoPair': { odds: 1, ja: 'ツーペア' },
+            'onePair': { odds: 0, ja: 'ワンペア' },
+            'highCard': { odds: 0, ja: 'ハイカード' },
+        }
     },
     created() {
         this.createDeck(),
@@ -62,6 +76,10 @@ const app = new Vue({
 
         reGiveCards: function () {
 
+            //betする
+            if (this.coin <= this.bet) return;
+            this.coin -= this.bet;
+
             let alertflag = true;
             let allhold = true;
 
@@ -74,7 +92,8 @@ const app = new Vue({
                     el.addEventListener('transitionend', () => {
                         if (dir == 'down') {
                             if (alertflag) {
-                                alert(this.rankCheck());
+                                alert(this.hands[this.rankCheck()].ja);
+                                this.coin+=this.hands[this.rankCheck()].odds*this.bet;
                                 alertflag = false;
                                 this.reset();
                             }
@@ -89,7 +108,8 @@ const app = new Vue({
                 }
             });
             if (allhold) {
-                alert(this.rankCheck());
+                alert(this.hands[this.rankCheck()].ja);
+                this.coin+=this.hands[this.rankCheck()].odds*this.bet;
                 this.reset();
             }
         },
@@ -147,25 +167,34 @@ const app = new Vue({
             }
 
             if (JSON.stringify(numList) == JSON.stringify([1, 10, 11, 12, 13]) && this.cards.every(card => card.mark == this.cards[0].mark)) {
-                return "ロイヤルフラッシュ"
+                return "Rfl"
             } else if (straitCheck() && this.cards.every(card => card.mark == this.cards[0].mark)) {
-                return "ストレートフラッシュ"
+                return "stfl"
             } else if (JSON.stringify(pairs) == JSON.stringify([4])) {
-                return "フォー・オブ・ア・カインド"
+                return "fourCard"
             } else if (JSON.stringify(pairs) == JSON.stringify([3, 2]) || JSON.stringify(pairs) == JSON.stringify([2, 3])) {
-                return "フルハウス"
+                return "fullHouse"
             } else if (this.cards.every(card => card.mark == this.cards[0].mark)) {
-                return "フラッシュ"
+                return "flush"
             } else if (straitCheck()) {
-                return "ストレート"
+                return "straight"
             } else if (JSON.stringify(pairs) == JSON.stringify([3])) {
-                return "スリー・オブ・ア・カインド"
+                return "threeCard"
             } else if (JSON.stringify(pairs) == JSON.stringify([2, 2])) {
-                return "ツーペア"
+                return "twoPair"
             } else if (JSON.stringify(pairs) == JSON.stringify([2])) {
-                return "ワンペア"
-            } else return "ハイカード"
+                return "onePair"
+            } else return "highCard"
+        },
+        betUp: function () {
+            if (this.bet + 1000 <= this.coin) {
+                this.bet += 1000;
+            }
+        },
+        betDown: function () {
+            if (this.bet > 1000) {
+                this.bet -= 1000;
+            }
         }
-
     }
 })
