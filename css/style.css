@@ -4,7 +4,7 @@
     width: 1080px;
 }
 
-body{
+body {
     text-align: center;
 }
 
@@ -12,7 +12,7 @@ h1 {
     text-align: center;
 }
 
-.btn{
+.btn {
     display: inline-block;
     color: #fff;
     font-size: 1.25rem;
@@ -22,22 +22,24 @@ h1 {
     border-radius: 30px;
 }
 
-.cards-item{
+.cards-item {
     position: relative;
 }
 
 .cards {
     width: 100%;
-    height: 400px;
+    margin: 30px 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     font-family: 'Tapestry', cursive;
 }
-.board{
+
+.board {
+    padding: 50px 0;
     background: rgb(131, 58, 180);
     overflow: hidden;
-    background: radial-gradient(circle, rgba(203,73,55,1) 0%, rgba(45,4,1,1) 100%);
+    background: radial-gradient(circle, rgba(203, 73, 55, 1) 0%, rgba(45, 4, 1, 1) 100%);
 }
 
 .card {
@@ -45,16 +47,17 @@ h1 {
     border-radius: 10px;
     width: 100px;
     height: 150px;
-    background-color: rgb(238,235,205);
+    background-color: rgb(238, 235, 205);
     cursor: pointer;
     user-select: none;
     top: 0;
     transition: top .8s;
 }
 
-.cardUp{
-    top: -300px;
+.cardUp {
+    top: -600px;
 }
+
 .num-upperleft {
     position: absolute;
     padding: 4px;
@@ -65,7 +68,7 @@ h1 {
     font-size: 24px;
 }
 
-.mark{
+.mark {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -84,22 +87,24 @@ h1 {
     transform: rotate(180deg);
 }
 
-.hold{
+.hold {
     width: 100%;
     height: 20px;
-    color:#fff;
+    color: #fff;
 }
 
-.bet-info-area{
+.bet-info-area {
     padding: 10px;
     display: flex;
     justify-content: center;
     color: #fff;
 }
-.bet-info:first-of-type{
+
+.bet-info:first-of-type {
     margin-right: 30px;
 }
-.bet-info__ttl{
+
+.bet-info__ttl {
     background-color: #513A39;
     border: 3px solid #B4AE8A;
     border-radius: 20px;
@@ -107,18 +112,20 @@ h1 {
     font-family: 'Noto Serif JP', serif;
     font-size: 0.75rem;
 }
-.bet-info__body{
+
+.bet-info__body {
     margin-top: 2px;
     background-color: #B4AE8A;
     width: 150px;
     border-radius: 20px;
     padding: 3px 20px;
-    box-shadow: 0 0 10px #333,inset 0 0 3px #333 ;
+    box-shadow: 0 0 10px #333, inset 0 0 3px #333;
 }
-.bet-info__content{
+
+.bet-info__content {
     padding: 2px;
     background-color: #F7F2CE;
-    border: 1px solid rgba(0,0,0,.3);
+    border: 1px solid rgba(0, 0, 0, .3);
     color: #333;
     box-shadow: inset 0 0 8px #333;
     border-radius: 3px;
@@ -126,5 +133,44 @@ h1 {
     font-family: 'Noto Serif JP', serif;
     font-weight: 700;
     letter-spacing: .2em;
+    text-align: right;
+}
+
+.point-area {
+    background: linear-gradient(0deg, rgba(49, 37, 33, 1) 0%, rgba(88, 70, 73, 1) 100%);
+    border-radius: 80px;
+    border: 20px solid #B1AA89;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: inset 0 0 10px,0 0 10px;
+}
+
+.point-area__inner {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-shadow:
+        2px 0 0 black,
+        0 2px 0 black,
+        -2px 0 0 black,
+        0 -2px 0 black;
+    font-family: 'Noto Serif JP', serif;
+}
+
+.point-area__l-table {
+    margin-right: 40px;
+    border-collapse: collapse;
+}
+.point-area-table__row:not(:last-child){
+    border-bottom: 1px solid #fff;
+}
+
+.point-area-table__head {
+    text-align: left;
+    padding-right: 15px;
+}
+
+.point-area-table__content {
     text-align: right;
 }
