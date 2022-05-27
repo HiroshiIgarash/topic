@@ -16,10 +16,13 @@ h1 {
     display: inline-block;
     color: #fff;
     font-size: 1.25rem;
-    background-color: #6A3229;
+    background-color: #6a3229;
     border: 1px solid #000;
-    padding: 10px 60px;
-    border-radius: 30px;
+    padding: 0px 60px;
+    border-radius: 10px;
+}
+.btn:hover{
+    background-color: #6a3229b3;
 }
 
 .cards-item {
@@ -151,7 +154,7 @@ h1 {
     padding: 10px;
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: #B1AA89;
     text-shadow:
         2px 0 0 black,
         0 2px 0 black,
