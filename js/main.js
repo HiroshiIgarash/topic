@@ -91,6 +91,7 @@ const app = new Vue({
 
                 let alertflag = true;
                 let allhold = true;
+                let message = '';
 
                 this.cards.forEach((card, index) => {
                     if (!card.ishold) {
@@ -102,12 +103,12 @@ const app = new Vue({
                             if (dir == 'down') {
                                 if (alertflag) {
                                     let hand = this.hands[this.rankCheck()];
-
-                                    this.messageShow(
-                                        `おめでとうございます！
-${hand.ja}です！
-${hand.odds * this.bet}コインが当たりました！
-`);
+                                    if (hand.odds == 0) {
+                                        message = '残念でした！'
+                                    } else {
+                                        message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                                    }
+                                    this.messageShow(message);
                                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
                                     alertflag = false;
                                     // this.reset();
@@ -123,7 +124,14 @@ ${hand.odds * this.bet}コインが当たりました！
                     }
                 });
                 if (allhold) {
-                    this.messageShow(this.hands[this.rankCheck()].ja);
+                    let hand = this.hands[this.rankCheck()];
+                    if (hand.odds == 0) {
+                        message = '残念でした！'
+                    } else {
+                        message = "おめでとうございます！\n" + hand.ja + "です！\n" + hand.odds * this.bet + "コインが当たりました！";
+                    }
+                    this.messageShow(message);
+                    // this.messageShow(this.hands[this.rankCheck()].ja);
                     // this.coin += this.hands[this.rankCheck()].odds * this.bet;
                     // this.reset();
                 }
